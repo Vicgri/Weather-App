@@ -18,12 +18,12 @@ struct ContentView: View {
       
       VStack
       {
-        Text("Bergen, Norway")
+        Text("Bergen, Norge")
           .font(.system(size: 32, weight: .medium, design: .default))
           .foregroundColor(.white)
           .padding()
         
-        VStack(spacing: 8)
+        VStack(spacing: 1)
         {
           Image(systemName: "cloud.sun.fill")
             .renderingMode(.original)
@@ -35,104 +35,51 @@ struct ContentView: View {
             .font(.system(size: 70, weight: .medium))
             .foregroundColor(.white)
           
-        }
-        HStack (spacing: 10) {
-      
-          VStack
-          {
-            Text("MAN")
-              .font(.system(size: 20))
-              .bold()
-              .foregroundColor(.white)
-            
-            Image(systemName: "cloud.sun.fill")
-              .renderingMode(.original)
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 50, height: 50)
-              .padding(3)
-            
-            Text("18°")
-              .foregroundColor(.white)
-              .font(.system(size: 22, weight: .bold))
-          }
-          VStack
-          {
-            Text("TIR")
-              .font(.system(size: 20))
-              .bold()
-              .foregroundColor(.white)
-            
-            Image(systemName: "cloud.fill")
-              .renderingMode(.original)
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 50, height: 50)
-              .padding(3)
-            
-            Text("13°")
-              .foregroundColor(.white)
-              .font(.system(size: 22, weight: .bold))
-          }
-          VStack
-          {
-            Text("ONS")
-              .font(.system(size: 20))
-              .bold()
-              .foregroundColor(.white)
-            
-            Image(systemName: "cloud.sun.rain.fill")
-              .renderingMode(.original)
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 50, height: 50)
-              .padding(3)
-            
-            Text("16°")
-              .foregroundColor(.white)
-              .font(.system(size: 22, weight: .bold))
-          }
-          VStack
-          {
-            Text("TORS")
-              .font(.system(size: 20))
-              .bold()
-              .foregroundColor(.white)
-            
-            Image(systemName: "sun.max.fill")
-              .renderingMode(.original)
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 50, height: 50)
-              .padding(3)
-            
-            Text("22°")
-              .foregroundColor(.white)
-              .font(.system(size: 22, weight: .bold))
-          }
-          VStack
-          {
-            Text("FRE")
-              .font(.system(size: 20))
-              .bold()
-              .foregroundColor(.white)
-            
-            Image(systemName: "wind")
-              .renderingMode(.original)
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 50, height: 50)
-              .padding(3)
-            
-            Text("20°")
-              .foregroundColor(.white)
-              .font(.system(size: 22, weight: .bold))
-          }
           
         }
-        .padding()
+        .padding(.bottom, 40)
+        
+        HStack (spacing: 20) {
+          WeatherDayView(dayOfWeek: "MAN",
+                         imageName: "cloud.sun.fill",
+                         temperature: 18)
+          
+          WeatherDayView(dayOfWeek: "TIR",
+                         imageName: "cloud.fill",
+                         temperature: 13)
+          
+          WeatherDayView(dayOfWeek: "ONS",
+                         imageName: "cloud.sun.rain.fill",
+                         temperature: 16)
+          
+          WeatherDayView(dayOfWeek: "TORS",
+                         imageName: "sun.max.fill",
+                         temperature: 22)
+          
+          WeatherDayView(dayOfWeek: "FRE",
+                         imageName: "wind",
+                         temperature: 20)
+          
+          
+        }
+
+        Spacer()
+        
+        Button {
+          print("tapped")
+        } label: {
+          Text("Se hele tabellen")
+            .frame(width: 280, height: 50)
+            .background(Color.white)
+            .font(.system(size: 20, weight: .bold, design: .default))
+            .cornerRadius(5)
+      
+        }
+        
+        Spacer()
+        
+        
       }
-      Spacer()
     }
   }
   
@@ -143,3 +90,31 @@ struct ContentView: View {
 #Preview {
   ContentView()
 };
+
+struct WeatherDayView: View {
+  
+  var dayOfWeek: String
+  var imageName: String
+  var temperature: Int
+  
+  var body: some View {
+    VStack
+    {
+      Text(dayOfWeek)
+        .font(.system(size: 20))
+        .bold()
+        .foregroundColor(.white)
+      
+      Image(systemName: imageName)
+        .renderingMode(.original)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 50, height: 50)
+        .padding(3)
+      
+      Text("\(temperature)°")
+        .foregroundColor(.white)
+        .font(.system(size: 22, weight: .bold))
+    }
+  }
+}
