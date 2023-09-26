@@ -51,8 +51,8 @@ struct ContentView: View {
           isNight.toggle()
         } label: {
           WeatherButton(title: isNight ? "Light Mode" : "Dark Mode",
-                        textColor: .blue,
-                        backgroundColor: .white)
+                        textColor: .white,
+                        backgroundColor: .mint)
         }
         
         Spacer()
@@ -79,8 +79,9 @@ struct WeatherDayView: View {
         .foregroundColor(.white)
       
       Image(systemName: imageName)
-        .renderingMode(.original)
+        .symbolRenderingMode(.multicolor)
         .resizable()
+       // .foregroundStyle(.white, .yellow, .green)
         .aspectRatio(contentMode: .fit)
         .frame(width: 50, height: 50)
         .padding(3)
@@ -97,11 +98,16 @@ struct BackgroundView: View {
   @Binding var isNight: Bool
   
   var body: some View {
-    LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue,
-                                      isNight ? .gray : Color("lightBlue")]),
-                   startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/,
-                   endPoint: .bottomTrailing)
-    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+//    LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue,
+//                                      isNight ? .gray : Color("lightBlue")] ),
+//                   startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/,
+//                   endPoint: .bottomTrailing)
+//    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+    
+    ContainerRelativeShape()
+      .fill(isNight ? Color.black.gradient : Color.blue.gradient)
+      .ignoresSafeArea()
+
   }
 }
 
@@ -149,7 +155,7 @@ struct WeatherButton: View {
   var body: some View {
     Text(title)
       .frame(width: 280, height: 50)
-      .background(backgroundColor)
+      .background(backgroundColor.gradient)
       .foregroundColor(textColor)
       .font(.system(size: 20, weight: .bold, design: .default))
       .cornerRadius(10)
