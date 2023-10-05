@@ -18,7 +18,9 @@ struct ContentView: View {
       
       VStack {
         MainWeatherStatusView(imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
-                              temperature: 15)
+                              temperature: isNight ? 5 : 15)
+        
+        CityTextView(cityName: "Bergen, Norway")
         
         
         HStack (spacing: 20) {
@@ -58,11 +60,12 @@ struct ContentView: View {
         Spacer()
         
       }
-        
-      }
+      
     }
+    
   }
-  
+}
+
 
 struct WeatherDayView: View {
   
@@ -81,7 +84,7 @@ struct WeatherDayView: View {
       Image(systemName: imageName)
         .symbolRenderingMode(.multicolor)
         .resizable()
-       // .foregroundStyle(.white, .yellow, .green)
+      // .foregroundStyle(.white, .yellow, .green)
         .aspectRatio(contentMode: .fit)
         .frame(width: 50, height: 50)
         .padding(3)
@@ -98,16 +101,16 @@ struct BackgroundView: View {
   @Binding var isNight: Bool
   
   var body: some View {
-//    LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue,
-//                                      isNight ? .gray : Color("lightBlue")] ),
-//                   startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/,
-//                   endPoint: .bottomTrailing)
-//    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+    //    LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue,
+    //                                      isNight ? .gray : Color("lightBlue")] ),
+    //                   startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/,
+    //                   endPoint: .bottomTrailing)
+    //    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     
     ContainerRelativeShape()
       .fill(isNight ? Color.black.gradient : Color.blue.gradient)
       .ignoresSafeArea()
-
+    
   }
 }
 
